@@ -1,12 +1,8 @@
 using CounterStrikeSharp.API;
 using CounterStrikeSharp.API.Core;
-using CounterStrikeSharp.API.Core.Attributes.Registration;
-using CounterStrikeSharp.API.Core.Translations;
 using CounterStrikeSharp.API.Modules.Commands;
-using CounterStrikeSharp.API.Modules.Menu;
 using StoreApi;
 using System.Collections.Concurrent;
-using System.Text;
 using System.Text.Json.Serialization;
 
 namespace Store_Gamble;

@@ -1,5 +1,6 @@
 # Store-Gamble
 Gamble module for Store: Bet on amount of credits.
+Credit to [Natty](https://github.com/NaathySz) for most of the code parts.
 
 # Config
 Config will be auto generated. Default:
