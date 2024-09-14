@@ -13,6 +13,6 @@ Config will be auto generated. Default:
         "bet",
         "g"
     ],
-    "win_chance": 50,
+    "win_chance": 50
 }
 ```
