@@ -126,7 +126,7 @@ public class Store_Logs : BasePlugin, IPluginConfig<Config>
 				DiscordLog.DiscordEmbed(
 					client: DiscordWebhookClientLog,
 					title: $"{player.PlayerName}",
-					description: $"➜ {title} {credits} credits.\n➜ Reason: {reason}.\n➜ New Amount: {newAmount}.",
+					description: $"➜ SteamId: [{player.SteamID}](http://steamcommunity.com/profiles/{player.SteamID})\n ➜ {title} {credits} credits.\n➜ Reason: {reason}.\n➜ New Amount: {newAmount}.",
 					color: credits < 0 ? Color.DarkRed : Color.DarkGreen
 				);
 			}
