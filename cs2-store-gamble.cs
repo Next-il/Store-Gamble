@@ -59,7 +59,7 @@ public class Store_Gamble : BasePlugin, IPluginConfig<Store_GambleConfig>
 	public void OnConfigParsed(Store_GambleConfig config)
 	{
 		config.MinCredits = Math.Max(0, config.MinCredits);
-		config.MaxCredits = config.MaxCredits > 0 ? Math.Max(config.MinCredits + 1, config.MaxCredits) : 0;
+		config.MaxCredits = Math.Max(config.MinCredits + 1, config.MaxCredits);
 
 		config.WinChance = Math.Clamp(config.WinChance, 1, 100);
 
@@ -95,18 +95,10 @@ public class Store_Gamble : BasePlugin, IPluginConfig<Store_GambleConfig>
 			return;
 		}
 
-		// If not int or "all", reply with error
-		if (!int.TryParse(info.GetArg(1), out int credits) || credits <= 0)
+		if (!int.TryParse(info.GetArg(1), out int credits))
 		{
-			if (info.GetArg(1).ToLower() == "all")
-			{
-				credits = StoreApi.GetPlayerCredits(player);
-			}
-			else
-			{
-				info.ReplyToCommand(Localizer["Prefix"] + Localizer["Must be an integer"]);
-				return;
-			}
+			info.ReplyToCommand(Localizer["Prefix"] + Localizer["Must be an integer"]);
+			return;
 		}
 
 		if (StoreApi.GetPlayerCredits(player) < credits)
@@ -121,7 +113,7 @@ public class Store_Gamble : BasePlugin, IPluginConfig<Store_GambleConfig>
 			return;
 		}
 
-		if (Config.MaxCredits > 0 && credits > Config.MaxCredits)
+		if (credits > Config.MaxCredits)
 		{
 			info.ReplyToCommand(Localizer["Prefix"] + Localizer["Max gamble", Config.MaxCredits]);
 			return;
@@ -133,7 +125,7 @@ public class Store_Gamble : BasePlugin, IPluginConfig<Store_GambleConfig>
 		var win = Random.Next(1, 101) <= Config.WinChance;
 		var winCredits = win ? credits : -credits;
 
-		StoreApi.GivePlayerCredits(player, winCredits, "Gamble");
+		StoreApi.GivePlayerCredits(player, winCredits);
 
 		Server.PrintToChatAll(Localizer["Prefix"] + Localizer[win ? "Win" : "Lose", player.PlayerName, credits]);
 	}
